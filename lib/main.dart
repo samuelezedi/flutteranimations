@@ -27,7 +27,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
-  Animation animation;
+  Animation animation, delayedAnimation, muchDelayedAnimation;
   AnimationController animationController;
 
   @override
@@ -35,8 +35,22 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     // TODO: implement initState
     super.initState();
     animationController = AnimationController(duration: Duration(seconds: 2), vsync: this);
-    animation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
+    animation = Tween(begin: -1.0, end: 0.0).animate(CurvedAnimation(
         parent: animationController, curve: Curves.fastOutSlowIn));
+
+    delayedAnimation = Tween(begin: -1.0, end: 0.0).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Interval(0.5, 1.0, curve: Curves.fastOutSlowIn)
+      )
+    );
+
+    muchDelayedAnimation = Tween(begin: -1.0, end: 0.0).animate(
+        CurvedAnimation(
+            parent: animationController,
+            curve: Interval(0.8, 1.0, curve: Curves.fastOutSlowIn)
+        )
+    );
 
     animationController.forward();
   }
@@ -48,16 +62,52 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       animation: animationController,
       builder: (BuildContext context, Widget child){
         return Scaffold(
-          body: Transform(
-            transform: Matrix4.translationValues(animation.value * width, 0.0,0.0),
-            child: Center(
-              child: Container(
-                child: Text(
-                  'Login',
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)
+          body: Column(
+            children: <Widget>[
+              Transform(
+                transform: Matrix4.translationValues(animation.value * width, 0.0,0.0),
+                child: Center(
+                  child: Container(
+                    child: Text(
+                          'Login',
+                          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)
+                        ),
+
+                  ),
                 )
               ),
-            )
+              SizedBox(
+                height: 10,
+              ),
+              Transform(
+                  transform: Matrix4.translationValues(delayedAnimation.value * width, 0.0,0.0),
+                  child: Center(
+                    child: Container(
+                        child:Text(
+                                'Register',
+                                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)
+                            ),
+                    ),
+                  )
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Transform(
+                  transform: Matrix4.translationValues(muchDelayedAnimation.value * width, 0.0,0.0),
+                  child: Center(
+                    child: Container(
+                      child:Text(
+                          'Button',
+                          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)
+                      ),
+                    ),
+                  )
+              ),
+              SizedBox(
+                height: 10,
+              ),
+            ],
           ),
         );
       },
