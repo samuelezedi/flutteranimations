@@ -35,22 +35,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     // TODO: implement initState
     super.initState();
     animationController = AnimationController(duration: Duration(seconds: 2), vsync: this);
-    animation = Tween(begin: -1.0, end: 0.0).animate(CurvedAnimation(
+    animation = Tween(begin: -0.25, end: 0.0).animate(CurvedAnimation(
         parent: animationController, curve: Curves.fastOutSlowIn));
 
-    delayedAnimation = Tween(begin: -1.0, end: 0.0).animate(
-      CurvedAnimation(
-        parent: animationController,
-        curve: Interval(0.5, 1.0, curve: Curves.fastOutSlowIn)
-      )
-    );
 
-    muchDelayedAnimation = Tween(begin: -1.0, end: 0.0).animate(
-        CurvedAnimation(
-            parent: animationController,
-            curve: Interval(0.8, 1.0, curve: Curves.fastOutSlowIn)
-        )
-    );
 
     animationController.forward();
   }
@@ -76,37 +64,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   ),
                 )
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Transform(
-                  transform: Matrix4.translationValues(delayedAnimation.value * width, 0.0,0.0),
-                  child: Center(
-                    child: Container(
-                        child:Text(
-                                'Register',
-                                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)
-                            ),
-                    ),
-                  )
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Transform(
-                  transform: Matrix4.translationValues(muchDelayedAnimation.value * width, 0.0,0.0),
-                  child: Center(
-                    child: Container(
-                      child:Text(
-                          'Button',
-                          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)
-                      ),
-                    ),
-                  )
-              ),
-              SizedBox(
-                height: 10,
-              ),
+
+
             ],
           ),
         );
