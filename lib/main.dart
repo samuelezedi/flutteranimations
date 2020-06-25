@@ -59,7 +59,17 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           body: Center(
             child: Stack(
               children: <Widget>[
-
+                Center(
+                  child: Container(
+                    alignment: Alignment.bottomCenter,
+                    height: animation.value,
+                    width: animation.value,
+                    decoration: BoxDecoration(
+                      borderRadius: transformingAnimation.value,
+                      color: Colors.black
+                    ),
+                  ),
+                )
               ],
             ),
           )
