@@ -27,7 +27,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
-  Animation animation, delayedAnimation, muchDelayedAnimation;
+  Animation animation, childAnimation;
   AnimationController animationController;
 
   @override
@@ -35,11 +35,15 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     // TODO: implement initState
     super.initState();
     animationController = AnimationController(duration: Duration(seconds: 2), vsync: this);
-    animation = Tween(begin: -0.25, end: 0.0).animate(CurvedAnimation(
+    animation = Tween(begin: -1.0, end: 0.0).animate(CurvedAnimation(
         parent: animationController, curve: Curves.fastOutSlowIn));
 
-
-
+    childAnimation = Tween(begin: 20.0, end: 125.0).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Curves.easeIn
+      )
+    );
     animationController.forward();
   }
   @override
@@ -64,7 +68,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   ),
                 )
               ),
-
+              SizedBox(
+                height: 10,
+              ),
 
             ],
           ),
