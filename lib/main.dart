@@ -35,8 +35,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     // TODO: implement initState
     super.initState();
     animationController = AnimationController(duration: Duration(seconds: 2), vsync: this);
-    animation = Tween(begin: -1.0, end: 0.0).animate(CurvedAnimation(
-        parent: animationController, curve: Curves.fastOutSlowIn));
+    animation = Tween(begin: -0.10, end: 0.0).animate(CurvedAnimation(
+        parent: animationController, curve: Curves.easeIn));
 
     childAnimation = Tween(begin: 20.0, end: 125.0).animate(
       CurvedAnimation(
@@ -54,9 +54,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       animation: animationController,
       builder: (BuildContext context, Widget child){
         return Scaffold(
-          body: Column(
-            children: <Widget>[
-              Transform(
+          body:  Transform(
                 transform: Matrix4.translationValues(animation.value * width, 0.0,0.0),
                 child: Center(
                   child: Container(
@@ -68,12 +66,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   ),
                 )
               ),
-              SizedBox(
-                height: 10,
-              ),
 
-            ],
-          ),
+
         );
       },
     );
