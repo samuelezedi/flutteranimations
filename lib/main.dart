@@ -34,9 +34,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   void initState() {
     // TODO: implement initState
     super.initState();
-    animationController = AnimationController(duration: Duration(seconds: 2), vsync: this);
-    animation = Tween(begin: 10.0, end: 200.0).animate(CurvedAnimation(
-        parent: animationController, curve: Curves.ease));
+    animationController = AnimationController(duration: Duration(seconds: 4), vsync: this);
+    animation = Tween(begin: 0, end: 10).animate(CurvedAnimation(
+        parent: animationController, curve: Curves.easeOut));
 
     animationController.forward();
   }
@@ -49,20 +49,14 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       builder: (BuildContext context, Widget child){
         return Scaffold(
           body: Center(
-            child: Stack(
-              children: <Widget>[
-                Center(
-                  child: Container(
-                    alignment: Alignment.bottomCenter,
-                    height: animation.value,
-                    width: animation.value,
-                    decoration: BoxDecoration(
-                      color: Colors.black
-                  ),
-                  ),
-                )
-              ],
-            ),
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  Text('Loading...'),
+                  Text(animation.value.toString(), style: TextStyle(fontSize: 52,),)
+                ],
+              ),
+            )
           )
 
         );
