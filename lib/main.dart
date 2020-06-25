@@ -27,7 +27,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
-  Animation animation, transformingAnimation;
+  Animation animation;
   AnimationController animationController;
 
   @override
@@ -37,14 +37,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     animationController = AnimationController(duration: Duration(seconds: 2), vsync: this);
     animation = Tween(begin: 10.0, end: 200.0).animate(CurvedAnimation(
         parent: animationController, curve: Curves.ease));
-
-    transformingAnimation = BorderRadiusTween(
-      begin: BorderRadius.circular(125.0),
-      end: BorderRadius.circular(0.0)
-    ).animate(CurvedAnimation(
-      parent: animationController,
-      curve: Curves.ease
-    ));
 
     animationController.forward();
   }
@@ -65,9 +57,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     height: animation.value,
                     width: animation.value,
                     decoration: BoxDecoration(
-                      borderRadius: transformingAnimation.value,
                       color: Colors.black
-                    ),
+                  ),
                   ),
                 )
               ],
