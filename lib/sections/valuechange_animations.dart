@@ -14,9 +14,10 @@ class _ValueChangeState extends State<ValueChange> with SingleTickerProviderStat
     // TODO: implement initState
     super.initState();
     animationController = AnimationController(duration: Duration(seconds: 4), vsync: this);
-    animation = Tween(begin: 0.0, end: -0.1).animate(CurvedAnimation(
+    animation = Tween(begin: 0, end: 10).animate(CurvedAnimation(
         parent: animationController, curve: Curves.easeOut));
 
+    animationController.forward();
   }
   @override
   Widget build(BuildContext context) {
@@ -42,4 +43,3 @@ class _ValueChangeState extends State<ValueChange> with SingleTickerProviderStat
     );
   }
 }
-

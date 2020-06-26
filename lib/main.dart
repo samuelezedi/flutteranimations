@@ -27,41 +27,85 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
-  Animation animation;
-  AnimationController animationController;
+Animation animation;
+AnimationController animationController;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    animationController = AnimationController(duration: Duration(seconds: 4), vsync: this);
-    animation = Tween(begin: 0, end: 10).animate(CurvedAnimation(
-        parent: animationController, curve: Curves.easeOut));
+@override
+void initState() {
+  // TODO: implement initState
+  super.initState();
+  animationController = AnimationController(duration: Duration(seconds: 4), vsync: this);
+  animation = Tween(begin: 0.0, end: -0.15).animate(CurvedAnimation(
+      parent: animationController, curve: Curves.easeOut));
 
-    animationController.forward();
-  }
-  @override
-  Widget build(BuildContext context) {
+}
+@override
+Widget build(BuildContext context) {
 
-    
-    return AnimatedBuilder(
-      animation: animationController,
-      builder: (BuildContext context, Widget child){
-        return Scaffold(
+  final width = MediaQuery.of(context).size.width;
+
+  return AnimatedBuilder(
+    animation: animationController,
+    builder: (BuildContext context, Widget child){
+      return Scaffold(
           body: Center(
-            child: Container(
-              child: Column(
+              child: Stack(
                 children: <Widget>[
-                  Text('Loading...'),
-                  Text(animation.value.toString(), style: TextStyle(fontSize: 52,),)
+                  Center(
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      width: 350,
+                      height: 200,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15)
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          RaisedButton(
+                            onPressed: (){
+
+                            },
+                            elevation: 7.0,
+                            textColor: Colors.white,
+                            child: Text('Ok'),
+                            color: Colors.green,
+                          ),
+                          RaisedButton(
+                            onPressed: (){
+
+                            },
+                            elevation: 7.0,
+                            textColor: Colors.white,
+                            child: Text('Cancel'),
+                            color: Colors.green,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Center(
+                      child: GestureDetector(
+                        child: Container(
+                          alignment: Alignment.bottomCenter,
+                          width: 350,
+                          height: 200,
+                          decoration: BoxDecoration(
+                              color: Colors.purpleAccent,
+                              borderRadius: BorderRadius.circular(15)
+                          ),
+                          transform: Matrix4.translationValues(0.0, animation.value * width, 0.0),
+                        ),
+                      )
+                  )
                 ],
-              ),
-            )
+              )
           )
 
-        );
-      },
-    );
-  }
+      );
+    },
+  );
+}
 }
 
